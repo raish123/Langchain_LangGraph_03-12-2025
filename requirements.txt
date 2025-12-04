@@ -1,0 +1,41 @@
+#Importing Langchain Core Framework
+#main langchain library (this includes langchain-core internally)
+langchain 
+langchain-core
+langchain-community
+
+# OpenAI integration
+langchain-openai
+openai
+
+#Groq integration
+langchain-groq
+
+# Anthropic integration
+langchain-anthropic
+
+# Google Gemini integration
+langchain-google-genai
+google-generativeai
+
+# Hugging Face integration
+langchain-huggingface
+transformers
+huggingface_hub     
+sentence-transformers
+huggingface_hub[hf_xet]
+
+# Environment variable handling
+python-dotenv
+
+
+#langgraph Module.
+langgraph
+
+#torch library
+torch
+torchtext
+torchinfo
+ipykernel
+notebook
+optuna
