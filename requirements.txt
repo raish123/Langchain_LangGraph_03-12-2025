@@ -3,6 +3,7 @@
 langchain 
 langchain-core
 langchain-community
+langchain-exa
 
 # OpenAI integration
 langchain-openai
@@ -39,3 +40,9 @@ torchinfo
 ipykernel
 notebook
 optuna
+
+ipykernel
+
+notebook
+
+#langchain-hub
