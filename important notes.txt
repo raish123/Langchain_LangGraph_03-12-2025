@@ -1,0 +1,66 @@
+Standard Rule: Overlap = 15-20% of chunk_size
+
+Chunk Size | Overlap (15%) | Overlap (20%) | Use Case
+-----------|---------------|---------------|----------
+500        | 75            | 100           | Short content
+1000       | 150           | 200           | General (DEFAULT)
+1500       | 225           | 300           | Technical docs
+2000       | 300           | 400           | Legal/Medical
+3000       | 450           | 600           | Long-form content
+
+
+Retrieval Method                    % Usage    Performance
+─────────────────────────────────────────────────────────
+Hybrid Search (Dense + Sparse)      75%        ⭐⭐⭐⭐⭐
+Semantic + Reranking               45%        ⭐⭐⭐⭐⭐
+Multi-vector (Parent-Child)        25%        ⭐⭐⭐⭐
+Ensemble Retrieval                 20%        ⭐⭐⭐⭐
+Simple Semantic Search             15%        ⭐⭐⭐
+Query Transformation               30%        ⭐⭐⭐⭐
+MMR (Diversity)                    35%        ⭐⭐⭐⭐
+Self-Query (Metadata filtering)    40%        ⭐⭐⭐⭐
+
+
+| **Metric**     | **Dense Only** | **Sparse Support** | **Hybrid Search** | **Use Case**                                        |
+| -------------- | -------------- | ------------------ | ----------------- | --------------------------------------------------- |
+| **cosine**     | ✅ Yes          | ❌ No               | ❌ No              | Pure semantic search (meaning-based similarity)     |
+| **euclidean**  | ✅ Yes          | ❌ No               | ❌ No              | Distance-based search (clustering, numeric vectors) |
+| **dotproduct** | ✅ Yes          | ✅ Yes              | ✅ Yes             | Hybrid search (semantic + keyword / BM25)           |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#---------------------Important Imports Langchain or Langgraph--------------------------------------------------
+# LangChain imports
+from langchain_community.document_loaders import S3DirectoryLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.schema import Document
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+
+# Pinecone imports
+from pinecone import Pinecone, ServerlessSpec
+from langchain_pinecone import PineconeHybridSearchRetriever
+
+# Reranking imports
+from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import CohereRerank
+
+# BM25 for hybrid search
+from pinecone_text.sparse import BM25Encoder
+
+# LangGraph imports
+from langgraph.graph import StateGraph, END
+
+# Evaluation imports
+import numpy as np
+from collections import defaultdict

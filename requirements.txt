@@ -44,5 +44,5 @@ optuna
 ipykernel
 
 notebook
-
+boto3
 #langchain-hub
