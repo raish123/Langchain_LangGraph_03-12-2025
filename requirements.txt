@@ -1,48 +1,76 @@
-#Importing Langchain Core Framework
-#main langchain library (this includes langchain-core internally)
-langchain 
-langchain-core
-langchain-community
-langchain-exa
+# ==============================
+# LangChain Core Framework
+# ==============================
+langchain                # Main LangChain package (chains, prompts, loaders)
+langchain-core           # Core abstractions (runnables, messages, schemas)
+langchain-community      # Community integrations (vectorstores, loaders)
+langchain-exa            # EXA search integration (web / document search)
 
-# OpenAI integration
-langchain-openai
-openai
+# ==============================
+# LLM Provider Integrations
+# ==============================
+langchain-openai         # OpenAI models integration
+openai                   # OpenAI Python SDK
 
-#Groq integration
-langchain-groq
+langchain-groq           # Groq LLM integration (fast inference)
+langchain-anthropic      # Anthropic Claude integration
 
-# Anthropic integration
-langchain-anthropic
+langchain-google-genai   # Google Gemini integration
+google-generativeai      # Google Generative AI SDK
 
-# Google Gemini integration
-langchain-google-genai
-google-generativeai
+# ==============================
+# Hugging Face / Open Source Models
+# ==============================
+langchain-huggingface    # HuggingFace models inside LangChain
+transformers             # Transformer models (BERT, ViT, LayoutLM, DONUT)
+huggingface-hub          # Download & manage HF models
+huggingface-hub[hf_xet]  # Faster large model downloads
+sentence-transformers    # Text embeddings (semantic search, RAG)
 
-# Hugging Face integration
-langchain-huggingface
-transformers
-huggingface_hub     
-sentence-transformers
-huggingface_hub[hf_xet]
+# ==============================
+# Environment & Workflow Orchestration
+# ==============================
+python-dotenv             # Load environment variables from .env
+langgraph                 # Stateful workflows, multi-step RAG pipelines
 
-# Environment variable handling
-python-dotenv
+# ==============================
+# PyTorch Stack (ML / Vision Models)
+# ==============================
+torch                     # Core deep learning framework
+torchvision               # Vision models & image utilities
+torchtext                 # NLP utilities for PyTorch
+torchinfo                 # Model summaries (debugging)
 
+# ==============================
+# Jupyter / Experimentation
+# ==============================
+ipykernel                 # Jupyter kernel support
+notebook                  # Jupyter Notebook UI
+optuna                    # Hyperparameter optimization (ML experiments)
 
-#langgraph Module.
-langgraph
+# ==============================
+# Cloud / Utilities
+# ==============================
+boto3                     # AWS SDK (S3, EC2, etc.)
 
-#torch library
-torch
-torchtext
-torchinfo
-ipykernel
-notebook
-optuna
+# ==============================
+# PDF & Document Processing (FREE)
+# ==============================
+pymupdf                   # Fast PDF parsing + image extraction (industry default)
+pdfplumber                # Text extraction & page-level PDF handling
 
-ipykernel
+# ==============================
+# Table Extraction from PDFs
+# ==============================
+camelot-py[cv]            # Table extraction from text-based PDFs (research papers)
 
-notebook
-boto3
-#langchain-hub
+# ==============================
+# OCR (Text from Images / Flowcharts)
+# ==============================
+pytesseract               # OCR engine wrapper (requires Tesseract system install)
+
+# ==============================
+# Image Processing
+# ==============================
+opencv-python             # Image processing (flowchart boxes, contours)
+pillow                    # Image loading, saving, format conversion

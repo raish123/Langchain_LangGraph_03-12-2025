@@ -1,0 +1,6 @@
+Collecting pypdf
+  Downloading pypdf-6.4.2-py3-none-any.whl.metadata (7.1 kB)
+Requirement already satisfied: typing_extensions>=4.0 in c:\anaconda\envs\tf-gpu\lib\site-packages (from pypdf) (4.15.0)
+Downloading pypdf-6.4.2-py3-none-any.whl (328 kB)
+Installing collected packages: pypdf
+Successfully installed pypdf-6.4.2

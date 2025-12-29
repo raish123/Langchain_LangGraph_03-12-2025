@@ -1,0 +1,158 @@
+Research paper / academic PDF → stream
+Financial / invoice / bordered tables → lattice
+
+| Parameter    | Use                      |
+| ------------ | ------------------------ |
+| `row_tol`    | Row spacing tolerance    |
+| `column_tol` | Column spacing tolerance |
+
+camelot.read_pdf(
+    "file.pdf",
+    pages="2",
+    flavor="stream",
+    row_tol=10,
+    column_tol=10
+)
+
+
+| Parameter            | Use                        |
+| -------------------- | -------------------------- |
+| `line_scale`         | Line thickness sensitivity |
+| `process_background` | Light background lines     |
+
+camelot.read_pdf(
+    "file.pdf",
+    pages="2",
+    flavor="lattice",
+    line_scale=40,
+    process_background=True
+)
+
+PDF
+ ├── Text ───────────────▶ Text Embedding ──▶ Pinecone
+ ├── Images
+ │     └── OCR / Caption ─▶ Text Embedding ─▶ Pinecone
+ ├── Flowcharts
+ │     └── OCR + Structure ─▶ Text Embedding ─▶ Pinecone
+ └── Tables
+       └── Table → Markdown/Text ─▶ Text Embedding ─▶ Pinecone
+
+
+
+PDF Folder (n files)
+   │
+   ├── Page-wise Processing
+   │      ├── Text
+   │      ├── Images (OCR)
+   │      ├── Tables (Camelot)
+   │
+   ├── Convert everything to TEXT
+   │
+   ├── LangChain Documents
+   │
+   ├── Embeddings
+   │
+   └── Pinecone Vector DB
+
+
+#=======================================================================#
+#==========Industry level approach =====================================#
+
+✅ Industry best practice (what companies actually do)
+
+Golden Rule
+
+👉 “Everything becomes high-quality text before embedding”
+
+So pipeline hota hai:
+
+PDF
+ ├── Text → Clean → Summarize →Recursive character text splitter---> Embed  
+ ├── Image → Caption / Explain → Embed
+ └── Table → Describe / Insights → Embed
+
+
+Isko bolte hain Content Normalization Layer
+
+Note:-
+🔑 Short, Clear Answer
+
+❌ Nahi, RecursiveCharacterTextSplitter
+sirf TEXT chunks ke liye lagta hai
+Images aur Tables ke liye nahi
+
+
+
+HYBRID RAG INGESTION PIPELINE (PRODUCTION READY)
+
+PDF
+ ├── Text  -> split -> LLM summary
+ ├── Image -> caption -> LLM enrichment
+ ├── Table -> LLM summary
+ ├── Dense embeddings (OpenAI)
+ ├── Sparse embeddings (BM25)
+ └── Store in Pinecone (Hybrid Search)
+
+
+
+==============================
+TEXT CHUNK METADATA
+==============================
+type: text
+page_number: 3
+source: attention.pdf
+parent_type: text
+
+
+==============================
+IMAGE CHUNK METADATA
+==============================
+type: image
+page_number: 5
+source: attention.pdf
+parent_type: image
+
+
+==============================
+TABLE CHUNK METADATA
+==============================
+type: table
+page_number: 7
+source: attention.pdf
+parent_type: table
+
+
+==============================
+TEXT CHUNK (WITH PARENT CONTEXT)
+==============================
+type: text
+page_number: 2
+source: attention.pdf
+parent_type: page_text
+
+
+
+🧠 FINAL GOAL (WHAT WE ARE BUILDING)
+PDF Folder
+ → Resume-safe processing
+ → Text / Image / Table extraction
+ → Text split (text only)
+ → Summarize / Caption
+ → Dense embeddings
+ → BM25 sparse encoder
+ → Pinecone Hybrid Index
+ → Cohere Rerank
+ → Query ready retriever
+
+
+🧱 HIGH LEVEL FLOW (PIPELINE MAP)
+process_pdf_directory
+ └── safe_process_pdf
+      ├── resume check (.done)
+      ├── extract + chunk
+      ├── train BM25 (once)
+      ├── create hybrid retriever
+      ├── store vectors
+      ├── attach Cohere rerank
+      └── mark .done
+

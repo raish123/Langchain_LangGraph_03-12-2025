@@ -28,9 +28,21 @@ Self-Query (Metadata filtering)    40%        ⭐⭐⭐⭐
 | **dotproduct** | ✅ Yes          | ✅ Yes              | ✅ Yes             | Hybrid search (semantic + keyword / BM25)           |
 
 
+#flow of AgenticRag
 
-
-
+User Question 
+    ↓
+Hybrid Search (Semantic + Keyword) → 20 candidates
+    ↓
+Reranking (Cohere Cross-Encoder) → Top 5 best
+    ↓
+LangGraph Pipeline (Retrieve → Context → Generate)
+    ↓
+LLM (GPT-4) → Grounded Answer with Citations
+    ↓
+Evaluation Metrics → Monitor Quality
+    ↓
+Response to User
 
 
 
